@@ -20,3 +20,7 @@ make px4_sitl
 chmod u+x swarm.sh
 ./swarm.sh
 ```
+
+# Known Issues
+
+- Launching QGroundControl, several warning messages display about firmware version errors. These seem ok to dismiss.

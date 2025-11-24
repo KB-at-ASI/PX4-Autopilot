@@ -3,10 +3,11 @@
 # set environment parameters here
 export GZ_VERSION=harmonic
 
-PX4_HOME=/home/kbaldwin/dev/PX4-Autopilot
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PX4_HOME=$SCRIPT_DIR
 LAUNCH_QGC=true
-GZ_WORLD=baylands_fast
-SIM_SPEED_FACTOR=0.5
+GZ_WORLD=swarm_demo_controller_world
+SIM_SPEED_FACTOR=1.0
 HOME_LAT=32.0617
 HOME_LON=118.778
 
@@ -15,10 +16,11 @@ HOME_LON=118.778
 # --------------------------------------------------------------------------
 DRONES=(
     "1 Drone1 4001 x500              0,0,0     14540 0"
-    "0 Drone2 4004 gz_standard_vtol  2,0,0.1     14541 1"
-    "0 Drone3 4025 xlab550           0,2,0.5     14542 2"
-    "0 Drone4 4024 x3                2,2,0.1     14543 3"
+    "0 Drone2 4004 gz_standard_vtol  250,30,0.1   14541 1"
+#    "0 Drone3 4025 xlab550           0,2,0.5     14542 2"
+#    "0 Drone4 4024 x3                2,2,0.1     14543 3"
 )
+
 
 
 # check to see if Gazebo is already running
@@ -32,14 +34,14 @@ if ps -ef | grep 'gz' | grep 'sim' > /dev/null 2>&1; then
     exit 1
 fi
 
-
+# Launch QGroundControl if desired
 if [[ "${LAUNCH_QGC}" == "true" ]]; then
     echo "Launching QGroundControl"
     gnome-terminal --tab --title="QGroundControl" -- bash -c "~/qgc/QGroundControl-x86_64-stable_5.0.8.AppImage; bash"
     sleep 7
 fi
 
-
+# Launch each drone
 for drone in "${DRONES[@]}"; do
     # Parse each line into variables
     read -r LAUNCH_GZ NAME AUTOSTART MODEL POSE PORT INSTANCE <<< "$drone"
@@ -83,7 +85,7 @@ for drone in "${DRONES[@]}"; do
         export PX4_GZ_WORLDS=${PX4_HOME}/Tools/simulation/gz/worlds;
         export PX4_GZ_PLUGINS=${PX4_HOME}/build/px4_sitl_default/src/modules/simulation/gz_plugins;
         export PX4_GZ_SERVER_CONFIG=${PX4_HOME}/src/modules/simulation/gz_bridge/server.config
-        export GZ_SIM_RESOURCE_PATH=\${GZ_SIM_RESOURCE_PATH}:\${PX4_GZ_MODELS}:/home/kbaldwin/dev/gazebo_models/:\${PX4_GZ_WORLDS};
+        export GZ_SIM_RESOURCE_PATH=\${GZ_SIM_RESOURCE_PATH}:\${PX4_GZ_MODELS}:\${PX4_GZ_WORLDS};
         export GZ_SIM_SYSTEM_PLUGIN_PATH=\$GZ_SIM_SYSTEM_PLUGIN_PATH:\$PX4_GZ_PLUGINS;
         export GZ_SIM_SERVER_CONFIG_PATH=\$PX4_GZ_SERVER_CONFIG;
 
