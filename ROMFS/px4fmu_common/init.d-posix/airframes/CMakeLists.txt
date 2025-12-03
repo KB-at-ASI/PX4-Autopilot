@@ -90,6 +90,8 @@ px4_add_romfs_files(
 	4021_gz_x500_flow
 	4024_gz_x3
 	4025_gz_xlab550
+	4026_gz_fixed_wing
+	4027_gz_lipan
 
 	6011_gazebo-classic_typhoon_h480
 	6011_gazebo-classic_typhoon_h480.post
