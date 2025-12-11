@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PX4_HOME=$SCRIPT_DIR
 LAUNCH_QGC=true
 GZ_WORLD=swarm_demo_controller_world
-SIM_SPEED_FACTOR=1.0
+SIM_SPEED_FACTOR=0.7
 HOME_LAT=32.0617
 HOME_LON=118.778
 
@@ -18,7 +18,7 @@ DRONES=(
     "1 Drone1 4001 x500              10.3,109.5,0.68       14540 0"
 #    "0 Drone2 4004 gz_standard_vtol  250,30,0.4  14541 1"
     "0 Drone2 4027 lipan            250,30,0.4  14541 1"
-    "0 Drone3 4025 xlab550           275.3,-102.68,0.35     14542 2"
+    "0 Drone3 4025 xlab550           225.3,-52.68,0.35     14542 2"
     "0 Drone4 4024 x3                2,2,0.4     14543 3"
 )
 
