@@ -17,7 +17,7 @@ HOME_LON=118.778
 DRONES=(
     "1 Drone1 4001 x500              10.3,109.5,0.68       14540 0"
 #    "0 Drone2 4004 gz_standard_vtol  250,30,0.4  14541 1"
-    "0 Drone2 4027 lipan            250,30,0.4  14541 1"
+    "0 Drone2 4027 fixed-wing            250,30,0.4  14541 1"
     "0 Drone3 4025 xlab550           225.3,-52.68,0.35     14542 2"
     "0 Drone4 4024 x3                2,2,0.4     14543 3"
 )
@@ -89,8 +89,6 @@ for drone in "${DRONES[@]}"; do
         export GZ_SIM_SERVER_CONFIG_PATH=\$PX4_GZ_SERVER_CONFIG;
 
         export PX4_SIM_SPEED_FACTOR=${SIM_SPEED_FACTOR};
-        export MULTI_SIM_GZ_WORLD=${GZ_WORLD};
-        export MULTI_SIM_SPEED_FACTOR=${SIM_SPEED_FACTOR};
 
         ${PX4_LAUNCH_CMD}
 
