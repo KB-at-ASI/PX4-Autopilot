@@ -224,6 +224,7 @@
               "x500",
               "x500_depth",
               "x500_lidar",
+	      "x500_gimbal",
               "rc_cessna",
               "standard_vtol",
             ],
